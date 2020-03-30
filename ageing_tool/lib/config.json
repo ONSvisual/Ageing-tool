@@ -1,36 +1,10 @@
 {
     "essential" : {
-            "graphic_data_url": "data.csv",
             "sourceText":["The spatial distribution of industries in Great Britain: 2015"],
-            "sourceURL":["https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/articles/thespatialdistributionofindustriesingreatbritain/2015"],
-			"chartTitles":[
-				"Persons",
-				"Males",
-				"Females"
-			],
-			"chartUnits":[
-				": per 100,000 population",
-				": per 100,000 population",
-				": per 100,000 population"
-			],
-			"dataFormats":[
-				".1f",
-				".1f",
-				".1f"
-			],
+            "sourceURL":["https://www.ons.gov.uk/"],
+
             "barHeight_sm_md_lg" : [70,70,70],
-            "xAxisLabel":"",
-			"xAxisScales":[
-				[0,1000],
-				[0,1000],
-				[0,1000],
-        [0,1000],
-        [0,1000],
-        [0,1000],
-        [0,1000],
-        [0,1000],
-        [0,1000]
-			]
+            "xAxisLabel":"%"
 
     },
     "optional" : {
@@ -42,13 +16,13 @@
             "aspectRatio_md" : [1,1],
             "aspectRatio_lg" : [1,1],
 
-            "mobileBreakpoint" : 550,
+            "mobileBreakpoint" : 580,
 
             "x_num_ticks_sm_md_lg" : [0,0,0]
 
     },
     "map": {"ons":{
-      "maptitle": "map about life expectancy",
+      "maptitle": "Old age dependancy",
       "varcolour": "PuBu",
       "varunit": "old-age-dependancy-ratio",
       "displaydecimals": 1,

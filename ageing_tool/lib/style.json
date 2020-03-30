@@ -31,11 +31,11 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://maps.tilehosting.com/data/v3.json?key=7rA0yA362pBi9PZxyYlY"
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=Qi2gszp5uSG09U66VCvH"
     }
   },
   "sprite": "https://openmaptiles.github.io/positron-gl-style/sprite",
-  "glyphs": "https://maps.tilehosting.com/fonts/{fontstack}/{range}.pbf?key=7rA0yA362pBi9PZxyYlY",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=Qi2gszp5uSG09U66VCvH",
   "layers": [
     {
       "id": "background",
@@ -55,7 +55,7 @@
         "Polygon"
       ],
       "layout": {
-        "visibility": "none"
+        "visibility": "visible"
       },
       "paint": {
         "fill-color": "rgb(230, 233, 229)"
@@ -75,7 +75,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "fill-color": "rgb(220, 220, 220)",
+        "fill-color": "rgba(255, 255, 255, 1)",
         "fill-antialias": true
       }
     },
@@ -204,7 +204,7 @@
         ]
       ],
       "layout": {
-        "visibility": "none"
+        "visibility": "visible"
       },
       "paint": {
         "fill-color": "rgb(220,224,220)",
@@ -256,8 +256,8 @@
         "text-rotation-alignment": "map",
         "symbol-spacing": 500,
         "text-font": [
-          "Metropolis Medium Italic",
-          "Open Sans Italic"
+          "Open Sans Medium Italic",
+          "Noto Sans Italic"
         ],
         "text-size": 12
       },
@@ -525,7 +525,6 @@
       "source": "openmaptiles",
       "source-layer": "aeroway",
       "minzoom": 11,
-      "maxzoom": 24,
       "filter": [
         "all",
         [
@@ -560,6 +559,73 @@
           ]
         },
         "line-opacity": 1
+      }
+    },
+    {
+      "id": "road_area_pier",
+      "type": "fill",
+      "metadata": {},
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Polygon"
+        ],
+        [
+          "==",
+          "class",
+          "pier"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgb(242,243,240)",
+        "fill-antialias": true
+      }
+    },
+    {
+      "id": "road_pier",
+      "type": "line",
+      "metadata": {},
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "in",
+          "class",
+          "pier"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgb(242,243,240)",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              15,
+              1
+            ],
+            [
+              17,
+              4
+            ]
+          ]
+        }
       }
     },
     {
@@ -783,7 +849,7 @@
       },
       "paint": {
         "line-color": "hsla(0, 0%, 85%, 0.69)",
-        "line-width": 1
+        "line-width": 2
       }
     },
     {
@@ -951,11 +1017,11 @@
           "stops": [
             [
               4,
-              1
+              2
             ],
             [
               6,
-              1
+              1.3
             ]
           ]
         }
@@ -1377,11 +1443,11 @@
       "layout": {
         "text-size": 10,
         "text-max-angle": 30,
-        "text-transform": "none",
+        "text-transform": "uppercase",
         "symbol-spacing": 350,
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          "Noto Sans Regular"
         ],
         "symbol-placement": "line",
         "visibility": "visible",
@@ -1425,8 +1491,8 @@
         "text-size": 10,
         "symbol-spacing": 350,
         "text-font": [
-          "Metropolis Light",
-          "Open Sans Regular"
+          "Open Sans Light",
+          "Noto Sans Regular"
         ],
         "symbol-placement": "line",
         "visibility": "visible",
@@ -1461,7 +1527,7 @@
       "layout": {
         "line-cap": "round",
         "line-join": "round",
-        "visibility": "visible"
+        "visibility": "none"
       },
       "paint": {
         "line-color": "rgb(230, 204, 207)",
@@ -1564,8 +1630,8 @@
         "text-size": 10,
         "text-transform": "none",
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          "Noto Sans Regular"
         ],
         "text-justify": "center",
         "visibility": "visible",
@@ -1574,8 +1640,7 @@
           0
         ],
         "text-anchor": "center",
-        "text-field": "{name:latin}\n{name:nonlatin}",
-        "text-keep-upright": false
+        "text-field": "{name:latin}\n{name:nonlatin}"
       },
       "paint": {
         "text-color": "rgb(117, 129, 145)",
@@ -1610,8 +1675,8 @@
         "text-size": 10,
         "text-transform": "none",
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          "Noto Sans Regular"
         ],
         "text-justify": "center",
         "visibility": "visible",
@@ -1655,8 +1720,8 @@
         "text-size": 10,
         "text-transform": "none",
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          "Noto Sans Regular"
         ],
         "text-justify": "left",
         "visibility": "visible",
@@ -1715,8 +1780,8 @@
         },
         "text-transform": "none",
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          "Noto Sans Regular"
         ],
         "text-justify": "left",
         "visibility": "visible",
@@ -1801,7 +1866,7 @@
         "text-transform": "none",
         "text-font": [
           "Open Sans Regular",
-          "Open Sans Regular"
+          "Noto Sans Regular"
         ],
         "text-justify": "left",
         "visibility": "visible",
@@ -1870,7 +1935,7 @@
           "stops": [
             [
               0,
-              "circle-11"
+              "star-11"
             ],
             [
               8,
@@ -1881,7 +1946,7 @@
         "text-transform": "none",
         "text-font": [
           "Open Sans Regular",
-          "Open Sans Regular"
+          "Noto Sans Regular"
         ],
         "text-justify": "left",
         "visibility": "visible",
@@ -1966,7 +2031,7 @@
         "text-transform": "none",
         "text-font": [
           "Open Sans Regular",
-          "Open Sans Regular"
+          "Noto Sans Regular"
         ],
         "text-justify": "left",
         "visibility": "visible",
@@ -2024,8 +2089,8 @@
         "visibility": "visible",
         "text-field": "{name:latin}\n{name:nonlatin}",
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          "Noto Sans Regular"
         ],
         "text-transform": "none",
         "text-size": 10
@@ -2067,8 +2132,8 @@
         "visibility": "visible",
         "text-field": "{name:latin}",
         "text-font": [
-          "Metropolis Light Italic",
-          "Open Sans Italic"
+          "Open Sans Light Italic",
+          "Noto Sans Italic"
         ],
         "text-transform": "none",
         "text-size": {
@@ -2138,8 +2203,8 @@
         "visibility": "visible",
         "text-field": "{name:latin}",
         "text-font": [
-          "Metropolis Regular",
-          "Open Sans Regular"
+          "Open Sans Regular",
+          ""
         ],
         "text-transform": "none",
         "text-size": {
@@ -2210,7 +2275,7 @@
         "text-field": "{name:latin}",
         "text-font": [
           "Open Sans Regular",
-          "Open Sans Regular"
+          "Noto Sans Regular"
         ],
         "text-transform": "none",
         "text-size": {
@@ -2251,5 +2316,5 @@
       }
     }
   ],
-  "id": "ciwf3o3u2008z2pmq7pmvm6xq"
+  "id": "positron"
 }

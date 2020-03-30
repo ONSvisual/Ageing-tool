@@ -1,11 +1,68 @@
 body {
   font-family: 'Open Sans';
-  max-width: 600px;
+  max-width: 944px;
 }
 
 #selectNav {
   /* height: 50px; */
 }
+
+#selectNavPara{
+background-color: #d0e4f5;
+font-size: 15px;
+}
+
+#barcodes #projections
+{
+    width: 100%;
+
+}
+#barcodes2 {
+    height:600px;
+  overflow-y: scroll;
+  overflow-x:hidden;
+
+}
+
+line #yAxisTicks {
+  stroke: #eeeeee;
+  stroke-width: 0.5px;  ;
+}
+
+#currVal {
+  font-size:16px;
+  font-weight: 700;
+  fill: #666;
+}
+
+.titleTx{
+  font-size: 12px;
+  font-weight: 700;
+
+}
+
+.bloc
+    {
+      font-size: 16px;
+      font-weight: 700;
+            display: inline-block;
+            width: 100%;
+          /*  padding: 4px;
+            margin-left: 2px;
+             float: left;
+      background-color:none;
+      margin-bottom:8px; */
+        }
+    #blocmap{
+      font-size: 17.6px;
+      font-weight: 700;
+      /*display: inline-block;*/
+      text-align: right;
+    }
+    .newBloc{
+      display: inline-block;
+      width: 100%;
+    }
 
 .voronoi path {
   fill: none;
@@ -16,26 +73,65 @@ body {
   pointer-events: none;
 }
 
+#horiz g.tick text{
+  font-size: 14px;
+  color: #323321;
+}
+
+.radiobtn{
+  height:10px !important;
+  width:10px !important;
+}
+
+.axislabel{
+  font-size: 14px;
+  font-family: Open Sans;
+  font-weight: 400;
+  text-anchor: start;
+  fill:#666;
+}
+
 /* map styles  */
 
 .mapboxgl-ctrl-group .mapboxgl-ctrl-compass {
   display: none;
 }
 
-@media (min-width: 599px) {
+/* tippy styling */
+
+.tippy-tooltip.ons-theme[x-placement^='top'] .tippy-arrow {
+border-top-color: #206095;
+}
+.tippy-tooltip.ons-theme[x-placement^='bottom'] .tippy-arrow {
+border-bottom-color: #206095;
+}
+.tippy-tooltip.ons-theme[x-placement^='left'] .tippy-arrow {
+border-left-color: #206095;
+}
+.tippy-tooltip.ons-theme[x-placement^='right'] .tippy-arrow {
+border-right-color: #206095;
+}
+.tippy-tooltip.ons-theme .tippy-roundarrow {
+fill: #206095;
+}
+.tippy-tooltip.ons-theme {
+    background-color: #206095;
+    color: white;
+  }
+
+  .tippy-tooltip.ons-theme[data-animatefill] {
+    background-color: transparent;
+  }
+
+  .tippy-tooltip.ons-theme .tippy-backdrop {
+    background-color: #206095;
+  }
+
+
+@media (min-width: 550px) {
   #map {
     height: 350px;
     width: 100%;
-  }
-
-  #selectNav {
-    /* position:absolute; */
-    /* top:0px;
-    left:0px;
-    width:30%;
-    height:40px;
-    background-color:rgba(255,255,255,0.8);
-    z-index:1; */
   }
 
   #keydiv {
@@ -48,13 +144,9 @@ body {
     z-index:1;
   }
 
-  #currVal {
-    font-size:14px;
-
-  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 549px) {
 
    /* body {
     height: 620px;
@@ -79,20 +171,6 @@ body {
     z-index:3;
   } */
 
-  #keydiv {
-    position:absolute;
-    top:-80px;
-    left:0px;
-    width:100%;
-    height:80px;
-    background-color:rgba(255,255,255,0.8);
-    z-index:1;
-  }
-
-  #currVal {
-    font-size:14px;
-
-  }
 
   .mapboxgl-ctrl-fullscreen {
     display:none !important;
