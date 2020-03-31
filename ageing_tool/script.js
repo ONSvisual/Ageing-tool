@@ -5,12 +5,13 @@ if (Modernizr.svg) {
   var hoverColour = "#236092";
   var x_key;
   var previousArea;
-  var listValues;
+//  var listValues;
   var valueColourPairs =[];
       selected=[];
   var hover = [];
       startColours = ["#053d58","#24a79b","#3a7899","#abc149"];
       unusedColours = ["#053d58","#24a79b","#3a7899","#abc149"];
+      blocsChosen = [];
   var filter;
   var legendVarName;
   var data;
@@ -232,7 +233,7 @@ function ready(data) {  //console.log(data);
 
                 // add a selection
                 selected.push(params.selected);
-              //  console.log("selected+ ", selected, evt, params.selected);
+                console.log("selected+ ", selected, evt, params.selected);
                 if(d3.select("#barcodes").style("display") === 'inline'){
                                                         setAxisVal(params.selected); }
                 //allChange(params.selected);
@@ -242,14 +243,17 @@ function ready(data) {  //console.log(data);
                 unusedColours.shift();
                 hoverColour = unusedColours[0];
 
-                d3.selectAll(".search-choice")
-                .data(selected)
-                .join()
-                .style("background-color",function(d){
-                                  return valueColourPairs.filter(function(e){
-                                          //console.log(e);
-                                          return e.value == d})[0].colour;
-                                          });
+                // d3.selectAll(".search-choice")
+                // .data(selected)
+                // .join()
+                // .style("background-color",function(d){
+                //                   return valueColourPairs.filter(function(e){
+                //                           //console.log(e);
+                //                           return e.value == d})[0].colour;
+                //                           });
+                // remove from chosen list and replace with what's left
+               d3.selectAll('li.search-choice').remove();
+
 
                 selectedColour = valueColourPairs.filter(function(d){ return d.value===params.selected })[0].colour;
 
@@ -273,11 +277,14 @@ function ready(data) {  //console.log(data);
       }  // ends  === 'selected'
   // else deleting deleting deleting deleting deleting deleting
       else { console.log("deleting ",params.deselected);
+        // remove whole div
+        d3.select('#blocDiv_'+params.deselected).remove();
+
         // delete deselected item from selected array
         selected = selected.filter(function(item) {
           return item !== params.deselected;
         });
-    console.log("selected- ", selected);
+
         // push the colour associated with the value to the beginning of the unusedColours arrayfg
         unusedColours.unshift(valueColourPairs.filter(function(d){ return d.value == params.deselected })[0].colour)
         if(unusedColours.length === 4) {
@@ -307,22 +314,22 @@ function ready(data) {  //console.log(data);
          //console.log(graphic_data_full[0].length, graphic_data_full);
          //console.log(graphic_data_full[0].splice(inc+1,1));
 
-    if (typeof /*graphic_data_full != "undefined" && */graphic_data_full != null && graphic_data_full.length > 0)
-     {
-         graphic_data_full[0].splice(inc+1,1);
-         console.log("removed data from graphic-data-full - sure?: ",params.deselected);
-          console.log(graphic_data_full);
-      }
+    // if (typeof /*graphic_data_full != "undefined" && */graphic_data_full != null && graphic_data_full.length > 0)
+    //  {
+    //      graphic_data_full[0].splice(inc+1,1);
+    //      console.log("removed data from graphic-data-full - sure?: ",params.deselected);
+    //       console.log(graphic_data_full);
+    //   }
 
 //////////////////////////// NEW  //////////////////////////////
             // remove index inc??
-              if (laCode[0] > 0){
-              laCode[0] = laCode[0].filter(function(d,i) {
-                    console.log(i, d, params.deselected);
-                    return d !== params.deselected;
-                    });
-                console.log("laCode - params - WORKING - sure?  ", laCode);
-              }
+              // if (laCode[0] > 0){
+              // laCode[0] = laCode[0].filter(function(d,i) {
+              //       console.log(i, d, params.deselected);
+              //       return d !== params.deselected;
+              //       });
+              //   console.log("laCode - params - WORKING - sure?  ", laCode);
+              // }
 
     removeLine(params.deselected); // I need to add 0-n
     unhighlight(params.deselected);
@@ -1665,6 +1672,9 @@ function newOrder(listID){ console.log('newOrder', selectedColour, listID);
         //  newLi
               .append('div')
               .attr('class', 'newBloc')
+              .attr("id", function(d,i){
+                      return 'blocDiv_' + localA[0].id;
+              })
               .style('float', 'left')
               .append('b')
               .attr('class', 'bloc')
@@ -1672,7 +1682,7 @@ function newOrder(listID){ console.log('newOrder', selectedColour, listID);
                       return 'blocNo_' + localA[0].id;
               })
               .style('padding', '5px 30px 5px 8px')
-              .style('margin-bottom', '8px')
+              .style('margin-top', '8px')
               .style('color', '#fff')
               .style("background-color", selectedColour)
             //  .append('span')
@@ -2117,7 +2127,7 @@ function unhighlight(area) { console.log("unhighlight from deleting list item on
 
     d3.select("." + area)
       //.attr('class', area)
-      .attr("fill", function(d){ console.log(d);
+      .attr("fill", function(d){ deleteBloc = d.label; console.log(d);
         if(d.label === 'United Kingdom') {return "#FF9933";}
           else{console.log("fill #ccc"); return "#ccc";} })
       .attr("opacity", function(d){
@@ -2154,7 +2164,7 @@ function onMove(e) {// console.log("F onMove", e, hoverColour);
       .attr("y",-20)
       .attr("height", 50)
       .raise();
-
+// Use World trade code
       barInfo.append("tspan")
         .attr("class","selectedareaText1")
         .text(function(){ return e + ": "; });
@@ -2193,8 +2203,8 @@ function onMove(e) {// console.log("F onMove", e, hoverColour);
 
         // delete the entry from value colour pairs
         valueColourPairs = valueColourPairs.filter(function(d) { //console.log("minus previous area ")
-          return d.value !== previousArea;
-        });
+                            return d.value !== previousArea;
+                          });
 
       } // ends returning everything back
     }  // ends an LA must be lit but we've moused now over a different one
@@ -2213,7 +2223,7 @@ function onMove(e) {// console.log("F onMove", e, hoverColour);
       // selectArea(e);
       setAxisVal(e);
 
-      listValues = $("#areaselect").val();
+      //listValues = $("#areaselect").val();
 
               if(selected.length === 0) {
                 $("#areaselect").val(hover);
@@ -2222,9 +2232,9 @@ function onMove(e) {// console.log("F onMove", e, hoverColour);
                 hoverColour = unusedColours[0];
               }else if(selected.length < 4) {
                 //console.log("New area rolled into: ")
-                $("#areaselect").val(selected.concat(hover));
+                //$("#areaselect").val(selected.concat(hover));
                 $("#areaselect").trigger("chosen:updated");
-                $("#areaselect").setSelectionOrder(selected.concat(hover));
+                //$("#areaselect").setSelectionOrder(selected.concat(hover));
 
                 hoverColour = unusedColours[0];
               }
@@ -2233,19 +2243,19 @@ function onMove(e) {// console.log("F onMove", e, hoverColour);
      unusedColours.shift();
     //  hoverColour = unusedColours[0];
     //console.log(valueColourPairs, unusedColours, hoverColour, hover);
-
-          d3.selectAll(".search-choice")
-          .data(selected.concat(hover))
-          .join()
-          .style("background-color",function(d){ //console.log(d);
-            return valueColourPairs.filter(function(f){ return f.value == d })[0].colour
-          });
-
+        // Adds chosen bloc to search-multiple
+          // d3.selectAll(".search-choice")
+          // .data(selected.concat(hover))
+          // .join()
+          // .style("background-color",function(d){ //console.log(d);
+          //   return valueColourPairs.filter(function(f){ return f.value == d })[0].colour
+          // });
+          //
     }  // ends if(newAREACD != oldAREACD)
 
     previousArea = e;
 
-              // google tag manager.
+              // google tag manager for mapHoverSelect.
               if(firsthover) {
                       dataLayer.push({
                           'event': 'mapHoverSelect',
