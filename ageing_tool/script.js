@@ -221,7 +221,7 @@ function ready(data) {  //console.log(data);
       .text(function(d){ return d.label });
 
     $('#areaselect').chosen({
-      placeholder_text_single: "Choose up to 4 areas",
+      placeholder_text_multiple: "Choose up to 4 areas",
       allow_single_deselect:true,
       disable_search:true,
       max_selected_options: 4
@@ -469,14 +469,16 @@ function drawGraphic(chart_data, categories, config, geog) {
          var innerPadding = { top : innerPadding_values.lg[0] ,  right : innerPadding_values.lg[1] ,  bottom : innerPadding_values.lg[2] ,  left : innerPadding_values.lg[3] };
      }
      //var chart_width = parseInt(graphic.style("width"))
-     var barcode_width = parseInt(d3.select('#graphic').style("width"));
+     var barcode_width = parseInt(d3.select('#graphic').style("width")) - 20; // the slider
      console.log("barcode_width, height  ", barcode_width, height);
 
      var x = d3.scaleLinear()
-       .range([ 0, (barcode_width - innerPadding.left-innerPadding.right - 20)]);
-       //.range([ 0, barcode_width - margin.left-margin.right]);
-    //  var middle = (barcode_width - innerPadding.left-innerPadding.right)/2;
-    var middle = (((barcode_width - margin.left-margin.right)/2) - 40);
+       .range([ 0, (barcode_width - innerPadding.left-innerPadding.right)]); // -20
+
+
+    //  !Important Hard wired
+    var adj = (barcode_width - margin.left-margin.right)/6;
+    var middle = (((barcode_width - margin.left-margin.right)/2) - adj);
 
      var xAxis = d3.axisBottom()
        .scale(x)
@@ -520,7 +522,7 @@ function drawGraphic(chart_data, categories, config, geog) {
 
       var g = svg
         .append("g")
-        .attr("transform", "translate(" + (diff+20) + "," + (margin.top+30) + ")");
+        .attr("transform", "translate(" + (diff+20) + "," + (margin.top+ 35) + ")");
 
       g.append('g').attr("class","bars")
         .selectAll('rect')
@@ -554,11 +556,11 @@ function drawGraphic(chart_data, categories, config, geog) {
           }
         })
         .attr("y", function(d){
-                  if(d.label === 'United Kingdom') { return "-10"; }
+                  if(d.label === 'United Kingdom') { return "-8"; }
                        else  {return "0"; }
                      })
         .attr("height", function(d){
-                  if(d.label === 'United Kingdom') { return "40"; }
+                  if(d.label === 'United Kingdom') { return "38"; }
                        else  {return "30"; }
                      })
         .style("zIndex", function(d){
@@ -579,11 +581,10 @@ function drawGraphic(chart_data, categories, config, geog) {
       var voronoi = d3.voronoi()
         .x(function(d) { return x(d.value) })
         .y(function(d) { return 0 })
-        .extent([
-          [-margin.left, -margin.top],
-          [barcode_width + margin.right, height + margin.bottom]
-        ]);
-
+        .extent([ [-margin.left, -innerPadding.top/2 ],
+          [barcode_width , height-innerPadding.bottom] ]);
+    //    .range([ 0, (barcode_width - innerPadding.left-innerPadding.right)]); // -20
+// svg    .attr("height", height + margin.top + margin.bottom );
       var voronoiGroup = g.append('g')
         .attr('class', 'voronoi');
 
@@ -2104,8 +2105,8 @@ function highlight(area) { //console.log("F highlight", area);
       .attr("fill", selectedColour)
       .attr("opacity","1")
       .attr("width","3px")
-      .attr("y",-10)
-      .attr("height", 40)
+      .attr("y",-8)
+      .attr("height", 38)
       .raise();
 
         //console.log(valueColourPairs, unusedColours, hoverColour );
@@ -2141,24 +2142,28 @@ function removeLine(removeMe){ console.log("removeLine[0-n] ", removeMe, inc);
 }
 
 
-function onMove(e) { //console.log("F onMove", e, hoverColour);
+function onMove(e) {// console.log("F onMove", e, hoverColour);
 
     hover = [];
     hover.push(e);
 
-    d3.selectAll('.'+e)
+    var barInfo = d3.selectAll('.'+e)
       .attr("fill", hoverColour)
       .attr("opacity","1")
       .attr("width","3px")
-      .attr("y",-10)
-      .attr("height", 40)
+      .attr("y",-20)
+      .attr("height", 50)
       .raise();
+
+      barInfo.append("tspan")
+        .attr("class","selectedareaText1")
+        .text(function(){ return e + ": "; });
 
     // if(previousArea !== undefined && d3.selectAll("." + previousArea).classed("active") === false) {
     //  previous area visit defined as so and greyed back
     if(previousArea !== "" && previousArea !== undefined && previousArea !== e) {
       if(d3.selectAll("." + previousArea).classed("active") === false) {
-      //  console.log("onMove from previousArea: ", previousArea);
+        console.log("onMove from previousArea: ", previousArea);
         d3.selectAll("."+previousArea)
           .attr("fill", "#ccc")
           .attr("opacity","0.4")
