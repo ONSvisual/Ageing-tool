@@ -7,22 +7,55 @@
             "buttonNames": [ "Monthly Index" ],
 
             "dateFormat":  "%Y",
+
+            "structure":[
+              "Population ageing summary",
+              "Population ageing summary",
+              "Older age groups",
+              "Older age groups",
+              "Comparator age groups",
+              "Comparator age groups",
+              "State Pension age",
+              "State Pension age",
+              "Sex ratio",
+              "Sex ratio",
+              "Single person households",
+              "Single person households",
+              "Economic activity",
+              "Economic activity"
+            ],
 			"variablelabels":[
         "Median age",
+        "Old age dependency ratio",
         "% aged 65 and over",
         "% aged 85 and over",
         "% aged 0 to 15",
         "% aged 16 to 64",
-        "% aged above State Pension age",
-        "% aged 16 to State Pension age",
-        "Old age dependency ratio",
+        "% aged above SPA",
+        "% aged 16 to SPA",
         "Sex ratio, 65 and over",
         "Sex ratio, 85 and over",
         "% single households aged 65 and over",
-        "% single households aged 85 and over"],
+        "% single households aged 85 and over",
+        "Economic activity 50-64",
+        "Employment rate 50-64"],
 
-            "yAxisLabel": ["%","%","%","%","%","%","Ratio"],
-            "xAxisBarLabel": ["yrs","%","%","%","%","%","%",null,null,null,"%","%"],
+        "projlabels":[
+          "Median age",
+          "Old age dependency ratio",
+          "% aged 65 and over",
+          "% aged 85 and over",
+          "% aged 0 to 15",
+          "% aged 16 to 64",
+          "% aged above SPA",
+          "% aged 16 to SPA",
+          "% single h/hs 65+",
+          "% single h/hs 85+"],
+
+            "yAxisLabel": ["ratio","%","%","%","%","%","%","%","%"],
+            "xAxisLabel":"year",
+            "xAxisLineLabel":["","%","%","%","%","%","%","%","%","%","%"],
+            "xAxisBarLabel": ["yrs","","%","%","%","%","%","%","","","%","%","%","%"],
             "sourceText":["Office for National Statistics"],
             "sourceURL":[],
             "addline": false,
@@ -41,12 +74,11 @@
             "circles" : false,
             "annotationCXCY":[],
 
-            "xAxisLabel":"",
             "yDomain":[0,500],
 
             "yAxisBreak": true,
             "yAxisBreak_sm_md_lg": [85,85,85],
-            "barHeight_sm_md_lg" : [100,80,80],
+            "barHeight_sm_md_lg" : [80,80,80],
 	           "numColumns_sm_md_lg":[2,2,2]
 
     },
@@ -55,13 +87,13 @@
             "margin_md": [10, 20, 20, 20],
             "margin_lg": [0, 0, 0, 0],
 
-            "innersm":[50 , 10 , 40 , 30 ],
-            "innermd":[35 , 10 , 50 , 30 ],
-            "innerlg":[50 , 10 , 50 , 30 ],
+            "innersm":[10 , 15 , 40 , 30 ],
+            "innermd":[10 , 15 , 50 , 30 ],
+            "innerlg":[10 , 15 , 50 , 30 ],
 
             "aspectRatio_sm" : [2,3],
             "aspectRatio_md" : [2,3],
-            "aspectRatio_lg" : [4,5],
+            "aspectRatio_lg" : [8,8],
 
             "mobileBreakpoint" : 550,
             "xAxisTextFormat_sm_md_lg" : ["%Y", "%Y", "%Y"],
@@ -72,7 +104,7 @@
     },
     "map": {"ons":{
       "maptitle": "Old age dependancy",
-      "varcolour": "PuBu",
+      "varcolour": "YlGn",
       "varunit": "old-age-dependancy-ratio",
       "displaydecimals": 1,
       "legenddecimals": 0,

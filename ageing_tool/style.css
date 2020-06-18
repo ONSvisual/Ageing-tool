@@ -8,25 +8,77 @@ body {
 }
 
 #selectNavPara{
-background-color: #d0e4f5;
+background-color: #fff;
 font-size: 15px;
 }
-
-#barcodes #projections
-{
-    width: 100%;
-
+p #selectNavPara{
+  margin-top: 0px;
 }
+
+/*#help{
+  position:absolute;
+ width: 100%;
+}*/
+
+ /*#projections {
+   position:relative;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+
 #barcodes2 {
     height:600px;
   overflow-y: scroll;
   overflow-x:hidden;
+}*/
+
+.chartTitle {
+  float:left;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 4px 0 4px 8px;
+}
+
+#keyunit{
+  position:relative;
+    width: 100%;
 
 }
 
-line #yAxisTicks {
+.infoEllip{
+      display: inline-block;
+      /*display: block;*/
+      overflow: hidden;
+      margin-right: 6px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    /*width: 100%;*/
+}
+.bc_names{
+      display: inline-block;
+      /*display: block;*/
+      overflow: hidden;
+      margin-right: 6px;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  /*width: 100%;*/
+}
+.info_bc{
+  padding-right: 10px;
+  width: 96%;
+}
+/*line #yAxisTicks {
   stroke: #eeeeee;
   stroke-width: 0.5px;  ;
+}*/
+
+.dateLine{
+  float: right;
+  font-weight: 700;
+  padding: 0px 3px;
+  /*margin-right: 10px;*/
 }
 
 #currVal {
@@ -41,18 +93,33 @@ line #yAxisTicks {
 
 }
 
-.bloc
+.chose_bc{
+  display: inline-block;
+  width: 96%;
+}
+.chose_bg{
+  background-color: #ddd;
+}
+
+  .li_span1 span{
+  float:right;
+  }
+
+#bloc
     {
       font-size: 16px;
       font-weight: 700;
-            display: inline-block;
-            width: 100%;
-          /*  padding: 4px;
-            margin-left: 2px;
-             float: left;
-      background-color:none;
-      margin-bottom:8px; */
+      display: inline-block;
+      /*width: 100%;*/
+      color: #fff;
+      background-color: #f93;
+      margin-left: 15px;
+    }
+        #blocRight{
+            float: right;
+            text-align: right;
         }
+
     #blocmap{
       font-size: 17.6px;
       font-weight: 700;
@@ -67,6 +134,8 @@ line #yAxisTicks {
 .voronoi path {
   fill: none;
   pointer-events: all;
+  /*stroke-width:1px;
+  stroke: #abc;*/
 }
 
 .active {
@@ -79,8 +148,13 @@ line #yAxisTicks {
 }
 
 .radiobtn{
-  height:10px !important;
-  width:10px !important;
+  height:4px !important;
+  width:4px !important;
+}
+.radioBoxed{
+  float:left;
+  padding:0px;
+
 }
 
 .axislabel{
@@ -97,35 +171,6 @@ line #yAxisTicks {
   display: none;
 }
 
-/* tippy styling */
-
-.tippy-tooltip.ons-theme[x-placement^='top'] .tippy-arrow {
-border-top-color: #206095;
-}
-.tippy-tooltip.ons-theme[x-placement^='bottom'] .tippy-arrow {
-border-bottom-color: #206095;
-}
-.tippy-tooltip.ons-theme[x-placement^='left'] .tippy-arrow {
-border-left-color: #206095;
-}
-.tippy-tooltip.ons-theme[x-placement^='right'] .tippy-arrow {
-border-right-color: #206095;
-}
-.tippy-tooltip.ons-theme .tippy-roundarrow {
-fill: #206095;
-}
-.tippy-tooltip.ons-theme {
-    background-color: #206095;
-    color: white;
-  }
-
-  .tippy-tooltip.ons-theme[data-animatefill] {
-    background-color: transparent;
-  }
-
-  .tippy-tooltip.ons-theme .tippy-backdrop {
-    background-color: #206095;
-  }
 
 
 @media (min-width: 550px) {
@@ -135,6 +180,7 @@ fill: #206095;
   }
 
   #keydiv {
+    display: block;
     /* position:absolute; */
     /* top:40px; */
     /* left:0px; */
